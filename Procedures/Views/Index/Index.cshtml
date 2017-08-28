@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div id="content"></div>
+<a href="#" onclick="GetJsonException();" class="btn btn-success" role="button">json异常测试</a>
+<script type="text/javascript">
+    function GetJsonException() {
+        $.ajax({
+            url: "/Index/GetJson2",
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                $("#content").html(data.Message);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                var status = XMLHttpRequest.status;
+                var readyState = XMLHttpRequest.readyState;
+                var responseText = XMLHttpRequest.responseText;
+                var statusText = XMLHttpRequest.statusText;
+                $("#content").html(status + "<br>" + textStatus + "<br>" + readyState + "<br>" + responseText +"<br>" + statusText);
+            }
+        })
+    }
+</script>
+
